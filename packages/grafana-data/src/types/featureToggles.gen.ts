@@ -216,4 +216,5 @@ export interface FeatureToggles {
   improvedExternalSessionHandling?: boolean;
   useSessionStorageForRedirection?: boolean;
   rolePickerDrawer?: boolean;
+  prometheusUsesCombobox?: boolean;
 }
