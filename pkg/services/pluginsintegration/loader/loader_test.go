@@ -521,7 +521,7 @@ func TestLoader_Load_ExternalRegistration(t *testing.T) {
 
 		backendFactoryProvider := fakes.NewFakeBackendProcessProvider()
 		backendFactoryProvider.BackendFactoryFunc = func(ctx context.Context, plugin *plugins.Plugin) backendplugin.PluginFactoryFunc {
-			return func(pluginID string, logger log.Logger, env func() []string) (backendplugin.Plugin, error) {
+			return func(pluginID string, logger log.Logger, tracer tracing.Tracer, env func() []string) (backendplugin.Plugin, error) {
 				require.Equal(t, "grafana-test-datasource", pluginID)
 				return &fakes.FakeBackendPlugin{}, nil
 			}
@@ -1017,7 +1017,7 @@ func TestLoader_Load_SkipUninitializedPlugins(t *testing.T) {
 		procPrvdr := fakes.NewFakeBackendProcessProvider()
 		// Cause an initialization error
 		procPrvdr.BackendFactoryFunc = func(ctx context.Context, p *plugins.Plugin) backendplugin.PluginFactoryFunc {
-			return func(pluginID string, _ log.Logger, _ func() []string) (backendplugin.Plugin, error) {
+			return func(pluginID string, _ log.Logger, _ tracing.Tracer, _ func() []string) (backendplugin.Plugin, error) {
 				if pluginID == "test-datasource" {
 					return nil, errors.New("failed to initialize")
 				}
