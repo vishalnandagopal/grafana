@@ -1,6 +1,7 @@
 import { Components } from '../generated/components.gen';
-import { MIN_GRAFANA_VERSION } from '../resolver';
 import { VersionedSelectorGroup } from '../types';
+
+import { MIN_GRAFANA_VERSION } from './constants';
 
 /**
  * Selectors grouped/defined in Pages

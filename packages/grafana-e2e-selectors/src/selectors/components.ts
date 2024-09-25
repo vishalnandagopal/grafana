@@ -5,8 +5,9 @@
 // in that case please add the attribute data-testid={selector} in the component and
 // prefix your selector string with 'data-testid' so that when create the selectors we know to search for it on the right attribute
 
-import { MIN_GRAFANA_VERSION } from '../resolver';
 import { VersionedSelectorGroup } from '../types';
+
+import { MIN_GRAFANA_VERSION } from './constants';
 
 import { Components } from '.';
 

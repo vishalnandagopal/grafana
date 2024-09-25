@@ -10,8 +10,6 @@ export type E2ESelectorGroup = {
 
 /**
  * Exposes selectors in package for easy use in e2e tests and in production code
- *
- * @alpha
  */
 export const selectors: E2ESelectorGroup = {
   pages: Pages,
@@ -20,7 +18,5 @@ export const selectors: E2ESelectorGroup = {
 
 /**
  * Exposes Pages, Component selectors and E2ESelectors type in package for easy use in e2e tests and in production code
- *
- * @alpha
  */
 export { Pages, Components, resolveSelectors, type E2ESelectors };

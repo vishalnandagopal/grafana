@@ -4,7 +4,7 @@ import { resolve, join } from 'path';
 import * as semver from 'semver';
 import * as ts from 'typescript';
 
-import { MIN_GRAFANA_VERSION } from '../src/resolver';
+import { MIN_GRAFANA_VERSION } from '../src/selectors/constants';
 
 const sourceDir = 'src/selectors';
 const destDir = 'src/generated';

@@ -1,4 +1,4 @@
-import * as semver from 'semver';
+import { gte, rcompare, valid } from 'semver';
 
 import { E2ESelectorGroup } from './selectors';
 import { versionedComponents } from './selectors/components';
@@ -12,8 +12,6 @@ import {
   VersionedSelectorGroup,
   VersionedStringSelector,
 } from './types';
-
-export const MIN_GRAFANA_VERSION = '8.0.0';
 
 /**
  * Resolves selectors based on the Grafana version
@@ -55,7 +53,7 @@ function isVersionedFunctionSelector(
 ): target is VersionedFunctionSelector {
   if (typeof target === 'object') {
     const [first] = Object.keys(target);
-    return !!semver.valid(first) && typeof target[first] === 'function';
+    return !!valid(first) && typeof target[first] === 'function';
   }
 
   return false;
@@ -66,7 +64,7 @@ function isVersionedStringSelector(
 ): target is VersionedStringSelector {
   if (typeof target === 'object') {
     const [first] = Object.keys(target);
-    return !!semver.valid(first) && typeof target[first] === 'string';
+    return !!valid(first) && typeof target[first] === 'string';
   }
 
   return false;
@@ -77,17 +75,17 @@ function isVersionedSelectorGroup(
 ): target is VersionedSelectorGroup {
   if (typeof target === 'object') {
     const [first] = Object.keys(target);
-    return !semver.valid(first);
+    return !valid(first);
   }
 
   return false;
 }
 
 function resolveStringSelector(versionedSelector: VersionedStringSelector, grafanaVersion: string): StringSelector {
-  let [versionToUse, ...versions] = Object.keys(versionedSelector).sort(semver.rcompare);
+  let [versionToUse, ...versions] = Object.keys(versionedSelector).sort(rcompare);
 
   for (const version of versions) {
-    if (semver.gte(version, grafanaVersion)) {
+    if (gte(version, grafanaVersion)) {
       versionToUse = version;
     }
   }
@@ -99,10 +97,10 @@ function resolveFunctionSelector(
   versionedSelector: VersionedFunctionSelector,
   grafanaVersion: string
 ): FunctionSelector {
-  let [versionToUse, ...versions] = Object.keys(versionedSelector).sort(semver.rcompare);
+  let [versionToUse, ...versions] = Object.keys(versionedSelector).sort(rcompare);
 
   for (const version of versions) {
-    if (semver.gte(version, grafanaVersion)) {
+    if (gte(version, grafanaVersion)) {
       versionToUse = version;
     }
   }
