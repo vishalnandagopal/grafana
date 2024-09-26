@@ -1945,6 +1945,8 @@
         "downloads": "Downloads",
         "from": "From",
         "links": "Links ",
+        "pluginDependants": "Required by: ",
+        "pluginDependencies": "Plugins: ",
         "reportAbuse": "Report a concern ",
         "signature": "Signature",
         "status": "Status",

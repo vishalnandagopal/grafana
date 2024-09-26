@@ -61,7 +61,7 @@ export function PluginDetailsRightPanel(props: Props): React.ReactElement | null
         <Box padding={2} borderColor="medium" borderStyle="solid">
           <Stack direction="column" gap={1}>
             <Text color="secondary">
-              <Trans i18nKey="plugins.details.labels.dependencies">Dependencies </Trans>
+              <Trans i18nKey="plugins.details.labels.dependencies">Dependencies</Trans>
             </Text>
             <Stack direction="column" gap={1}>
               <span className={styles.depBadge}>
