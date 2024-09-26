@@ -212,6 +212,8 @@ export interface FeatureToggles {
   appPlatformAccessTokens?: boolean;
   appSidecar?: boolean;
   groupAttributeSync?: boolean;
+  alertingQueryAndExpressionsStepMode?: boolean;
   improvedExternalSessionHandling?: boolean;
   useSessionStorageForRedirection?: boolean;
+  rolePickerDrawer?: boolean;
 }

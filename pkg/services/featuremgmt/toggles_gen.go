@@ -783,6 +783,10 @@ const (
 	// Enable the groupsync extension for managing Group Attribute Sync feature
 	FlagGroupAttributeSync = "groupAttributeSync"
 
+	// FlagAlertingQueryAndExpressionsStepMode
+	// Enables step mode for alerting queries and expressions
+	FlagAlertingQueryAndExpressionsStepMode = "alertingQueryAndExpressionsStepMode"
+
 	// FlagImprovedExternalSessionHandling
 	// Enable improved support for external sessions in Grafana
 	FlagImprovedExternalSessionHandling = "improvedExternalSessionHandling"
@@ -790,4 +794,8 @@ const (
 	// FlagUseSessionStorageForRedirection
 	// Use session storage for handling the redirection after login
 	FlagUseSessionStorageForRedirection = "useSessionStorageForRedirection"
+
+	// FlagRolePickerDrawer
+	// Enables the new role picker drawer design
+	FlagRolePickerDrawer = "rolePickerDrawer"
 )

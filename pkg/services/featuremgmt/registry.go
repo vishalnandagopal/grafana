@@ -1460,6 +1460,13 @@ var (
 			HideFromDocs: true,
 		},
 		{
+			Name:         "alertingQueryAndExpressionsStepMode",
+			Description:  "Enables step mode for alerting queries and expressions",
+			Stage:        FeatureStageExperimental,
+			Owner:        grafanaAlertingSquad,
+			FrontendOnly: true,
+		},
+		{
 			Name:              "improvedExternalSessionHandling",
 			Description:       "Enable improved support for external sessions in Grafana",
 			Stage:             FeatureStageExperimental,
@@ -1471,6 +1478,12 @@ var (
 			Name:        "useSessionStorageForRedirection",
 			Description: "Use session storage for handling the redirection after login",
 			Stage:       FeatureStagePublicPreview,
+			Owner:       identityAccessTeam,
+		},
+		{
+			Name:        "rolePickerDrawer",
+			Description: "Enables the new role picker drawer design",
+			Stage:       FeatureStageExperimental,
 			Owner:       identityAccessTeam,
 		},
 	}
