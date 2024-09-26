@@ -174,7 +174,7 @@ export function InstallControlsButton({
             {isInstalling ? 'Updating' : 'Update'}
           </Button>
         )}
-        <Button variant="destructive" disabled={disableUninstall} onClick={onUninstall} title={uninstallTitle}>
+        <Button variant="destructive" disabled={disableUninstall} onClick={showConfirmModal} title={uninstallTitle}>
           {uninstallBtnText}
         </Button>
       </Stack>
