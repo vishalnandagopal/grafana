@@ -66,7 +66,7 @@ export function PluginDetailsRightPanel(props: Props): React.ReactElement | null
             <Stack direction="column" gap={1}>
               <span className={styles.depBadge}>
                 <Icon name="grafana" className={styles.icon} />
-                Grafana {grafanaDependency}
+                <Trans i18nKey="plugins.details.labels.grafanaDependency">Grafana </Trans> {grafanaDependency}
               </span>
             </Stack>
 
