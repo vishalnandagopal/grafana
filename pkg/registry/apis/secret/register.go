@@ -1,11 +1,6 @@
 package secret
 
 import (
-	secret "github.com/grafana/grafana/pkg/apis/secret/v0alpha1"
-	grafanarest "github.com/grafana/grafana/pkg/apiserver/rest"
-	"github.com/grafana/grafana/pkg/services/apiserver/builder"
-	"github.com/grafana/grafana/pkg/services/featuremgmt"
-	secretstore "github.com/grafana/grafana/pkg/storage/secret"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -14,6 +9,12 @@ import (
 	"k8s.io/apiserver/pkg/registry/rest"
 	genericapiserver "k8s.io/apiserver/pkg/server"
 	common "k8s.io/kube-openapi/pkg/common"
+
+	secret "github.com/grafana/grafana/pkg/apis/secret/v0alpha1"
+	grafanarest "github.com/grafana/grafana/pkg/apiserver/rest"
+	"github.com/grafana/grafana/pkg/services/apiserver/builder"
+	"github.com/grafana/grafana/pkg/services/featuremgmt"
+	secretstore "github.com/grafana/grafana/pkg/storage/secret"
 )
 
 var _ builder.APIGroupBuilder = (*SecretAPIBuilder)(nil)

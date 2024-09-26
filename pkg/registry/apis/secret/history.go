@@ -4,11 +4,12 @@ import (
 	"context"
 	"net/http"
 
-	secret "github.com/grafana/grafana/pkg/apis/secret/v0alpha1"
-	secretstore "github.com/grafana/grafana/pkg/storage/secret"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apiserver/pkg/endpoints/request"
 	"k8s.io/apiserver/pkg/registry/rest"
+
+	secret "github.com/grafana/grafana/pkg/apis/secret/v0alpha1"
+	secretstore "github.com/grafana/grafana/pkg/storage/secret"
 )
 
 type secretHistory struct {

@@ -1,10 +1,11 @@
 package generic
 
 import (
-	"github.com/grafana/grafana/pkg/apimachinery/utils"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apiserver/pkg/registry/generic"
 	"k8s.io/apiserver/pkg/registry/generic/registry"
+
+	"github.com/grafana/grafana/pkg/apimachinery/utils"
 )
 
 func NewRegistryStore(scheme *runtime.Scheme, resourceInfo utils.ResourceInfo, optsGetter generic.RESTOptionsGetter) (*registry.Store, error) {

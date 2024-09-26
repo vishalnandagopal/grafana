@@ -4,9 +4,10 @@ import (
 	"context"
 	"fmt"
 
+	"xorm.io/xorm"
+
 	"github.com/grafana/grafana/pkg/services/sqlstore/migrator"
 	"github.com/grafana/grafana/pkg/setting"
-	"xorm.io/xorm"
 )
 
 func migrateSecretSQL(_ context.Context, engine *xorm.Engine, cfg *setting.Cfg) error {
