@@ -56,7 +56,7 @@ func schema_pkg_apis_secret_v0alpha1_AzureKeyVaultConfig(ref common.ReferenceCal
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"azurekeyvault": {
+					"url": {
 						SchemaProps: spec.SchemaProps{
 							Description: "mykeyvaultname.vault.azure.net/keys/mykeyname",
 							Default:     "",
@@ -65,7 +65,7 @@ func schema_pkg_apis_secret_v0alpha1_AzureKeyVaultConfig(ref common.ReferenceCal
 						},
 					},
 				},
-				Required: []string{"azurekeyvault"},
+				Required: []string{"url"},
 			},
 		},
 	}
@@ -98,7 +98,7 @@ func schema_pkg_apis_secret_v0alpha1_HashiCorpVaultConfig(ref common.ReferenceCa
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"azurekeyvault": {
+					"url": {
 						SchemaProps: spec.SchemaProps{
 							Default: "",
 							Type:    []string{"string"},
@@ -106,7 +106,7 @@ func schema_pkg_apis_secret_v0alpha1_HashiCorpVaultConfig(ref common.ReferenceCa
 						},
 					},
 				},
-				Required: []string{"azurekeyvault"},
+				Required: []string{"url"},
 			},
 		},
 	}
