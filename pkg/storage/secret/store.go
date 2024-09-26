@@ -96,11 +96,12 @@ type secureValueRow struct {
 	APIs        string // []string
 
 	// Used to decode the value
-	Manager        string
-	Path           string
-	Scheme         string
-	Salt           string
-	EncryptedValue string
+	Manager           string
+	Path              string
+	EncryptedProvider secret.KeyManagementProvider // the system used to encrypt (based on the manager)
+	EncryptedKID      string
+	EncryptedSalt     string
+	EncryptedValue    string
 }
 
 type secureValueEvent struct {
@@ -285,9 +286,10 @@ func (s *secureStore) Create(ctx context.Context, v *secret.SecureValue) (*secre
 		if err != nil {
 			return nil, err
 		}
-		row.Scheme = encrypted.Scheme
+		row.EncryptedProvider = encrypted.Provider
+		row.EncryptedKID = encrypted.KID
 		row.EncryptedValue = encrypted.Value
-		row.Salt = encrypted.Salt
+		row.EncryptedSalt = encrypted.Salt
 	}
 
 	// insert
@@ -433,9 +435,10 @@ func (s *secureStore) Update(ctx context.Context, obj *secret.SecureValue) (*sec
 		}
 
 		oldvalue, err := keeper.Decrypt(ctx, EncryptedValue{
-			Value:  existing.EncryptedValue,
-			Salt:   existing.Salt,
-			Scheme: existing.Scheme,
+			Provider: existing.EncryptedProvider,
+			KID:      existing.EncryptedKID,
+			Salt:     existing.EncryptedSalt,
+			Value:    existing.EncryptedValue,
 		})
 		if oldvalue == value && err == nil {
 			obj.Spec.Value = "" // no not return it
@@ -610,7 +613,8 @@ func (s *secureStore) List(ctx context.Context, ns string, options *internalvers
 		err = rows.Scan(&row.UID,
 			&row.Namespace, &row.Name, &row.Title,
 			&row.Manager, &row.Path,
-			&row.Scheme, &row.Salt, &row.EncryptedValue,
+			&row.EncryptedProvider, &row.EncryptedKID,
+			&row.EncryptedSalt, &row.EncryptedValue,
 			&row.Created, &row.CreatedBy,
 			&row.Updated, &row.UpdatedBy,
 			&row.Annotations, &row.Labels,
@@ -667,9 +671,10 @@ func (s *secureStore) Decrypt(ctx context.Context, ns string, name string) (*sec
 		v.Spec.Value, err = keeper.ReadValue(ctx, row.Path)
 	} else {
 		v.Spec.Value, err = keeper.Decrypt(ctx, EncryptedValue{
-			Value:  row.EncryptedValue,
-			Salt:   row.Salt,
-			Scheme: row.Scheme,
+			Provider: row.EncryptedProvider,
+			KID:      row.EncryptedKID,
+			Salt:     row.EncryptedSalt,
+			Value:    row.EncryptedValue,
 		})
 	}
 	return v, err
@@ -742,7 +747,8 @@ func (s *secureStore) get(ctx context.Context, ns string, name string) (*secureV
 		err = rows.Scan(&row.UID,
 			&row.Namespace, &row.Name, &row.Title,
 			&row.Manager, &row.Path,
-			&row.Scheme, &row.Salt, &row.EncryptedValue,
+			&row.EncryptedProvider, &row.EncryptedKID,
+			&row.EncryptedSalt, &row.EncryptedValue,
 			&row.Created, &row.CreatedBy,
 			&row.Updated, &row.UpdatedBy,
 			&row.Annotations, &row.Labels,

@@ -34,8 +34,9 @@ func initSecretStore(mg *migrator.Migrator) string {
 			{Name: "manager", Type: migrator.DB_NVarchar, Length: 128, Nullable: false},
 			{Name: "path", Type: migrator.DB_NVarchar, Length: 256, Nullable: false},
 
-			{Name: "scheme", Type: migrator.DB_NVarchar, Length: 36, Nullable: false},
-			{Name: "salt", Type: migrator.DB_NVarchar, Length: 64, Nullable: false},
+			{Name: "encrypted_provider", Type: migrator.DB_NVarchar, Length: 36, Nullable: false},
+			{Name: "encrypted_kid", Type: migrator.DB_NVarchar, Length: 36, Nullable: false},
+			{Name: "encrypted_salt", Type: migrator.DB_NVarchar, Length: 36, Nullable: false},
 			{Name: "encrypted_value", Type: migrator.DB_NVarchar, Length: 256, Nullable: false},
 			{Name: "encrypted_time", Type: migrator.DB_BigInt, Nullable: false}, // may change with rotation
 
@@ -54,8 +55,7 @@ func initSecretStore(mg *migrator.Migrator) string {
 		},
 		Indices: []*migrator.Index{
 			{Cols: []string{"namespace", "name"}, Type: migrator.UniqueIndex},
-			{Cols: []string{"manager"}, Type: migrator.IndexType},
-			{Cols: []string{"scheme"}, Type: migrator.IndexType},
+			{Cols: []string{"manager", "encrypted_kid"}, Type: migrator.IndexType}, // Used to find retired keys
 		},
 	})
 

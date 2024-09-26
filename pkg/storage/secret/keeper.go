@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"strings"
 
+	secret "github.com/grafana/grafana/pkg/apis/secret/v0alpha1"
 	"github.com/grafana/grafana/pkg/setting"
 	"github.com/grafana/grafana/pkg/util"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -14,9 +15,10 @@ import (
 )
 
 type EncryptedValue struct {
-	Scheme string // how was the value saved
-	Salt   string // random short string (never exposed externally)
-	Value  string // The encrypted value
+	Provider secret.KeyManagementProvider // the provider used to encrypt
+	KID      string                       // The key ID.  Used to identify which key encrypted the value
+	Salt     string                       // random short string (never exposed externally)
+	Value    string                       // The encrypted value
 }
 
 type SecretManager interface {
@@ -27,6 +29,9 @@ type SecretManager interface {
 type SecretKeeper interface {
 	Encrypt(ctx context.Context, value string) (EncryptedValue, error)
 	Decrypt(ctx context.Context, value EncryptedValue) (string, error)
+
+	// The set of keys we can still use to decrypt, but are not using for encryption
+	RetiredKeyIDs(ctx context.Context) ([]string, error)
 
 	// Get a remote value from a path
 	ReadValue(ctx context.Context, path string) (string, error)
@@ -68,15 +73,15 @@ func (s *simpleKeeper) Encrypt(ctx context.Context, value string) (EncryptedValu
 		return EncryptedValue{}, err
 	}
 	return EncryptedValue{
-		Scheme: "base64",
-		Salt:   salt,
-		Value:  base64.StdEncoding.EncodeToString([]byte(salt + value)),
+		KID:   "base64",
+		Salt:  salt,
+		Value: base64.StdEncoding.EncodeToString([]byte(salt + value)),
 	}, nil
 }
 
 // Decode implements SecretKeeper.
 func (s *simpleKeeper) Decrypt(ctx context.Context, value EncryptedValue) (string, error) {
-	if value.Scheme != "base64" {
+	if value.KID != "base64" {
 		return "", fmt.Errorf("unsupported key")
 	}
 
@@ -89,6 +94,10 @@ func (s *simpleKeeper) Decrypt(ctx context.Context, value EncryptedValue) (strin
 		return "", fmt.Errorf("salt not found in value")
 	}
 	return f, nil
+}
+
+func (s *simpleKeeper) RetiredKeyIDs(ctx context.Context) ([]string, error) {
+	return []string{}, nil
 }
 
 func (s *simpleKeeper) ReadValue(ctx context.Context, path string) (string, error) {
