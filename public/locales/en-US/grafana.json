@@ -1439,6 +1439,7 @@
       "dashboard": "Dashboard",
       "datasource": "Data source",
       "folder": "Folder",
+      "library_element": "Library Element",
       "unknown": "Unknown"
     },
     "summary": {

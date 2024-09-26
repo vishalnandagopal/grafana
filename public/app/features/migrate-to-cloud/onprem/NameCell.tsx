@@ -35,6 +35,8 @@ function ResourceInfo({ data }: { data: ResourceTableItem }) {
       return <DatasourceInfo data={data} />;
     case 'FOLDER':
       return <FolderInfo data={data} />;
+    case 'LIBRARY_ELEMENT':
+      return <LibraryElementInfo data={data} />;
   }
 }
 
@@ -132,6 +134,24 @@ function FolderInfo({ data }: { data: ResourceTableItem }) {
   );
 }
 
+function LibraryElementInfo({ data }: { data: ResourceTableItem }) {
+  if (data.status === "ERROR") {
+    return (
+      <>
+        <Text italic>Unable to library element</Text>
+        <Text color="secondary">Library Element {data.refId}</Text>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <span>TODO-name</span>
+      <Text color="secondary">{data.refId}</Text>
+    </>
+  );
+}
+
 function InfoSkeleton() {
   return (
     <>
@@ -153,6 +173,8 @@ function ResourceIcon({ resource }: { resource: ResourceTableItem }) {
     return <img className={styles.icon} src={datasource.meta.info.logos.small} alt="" />;
   } else if (resource.type === 'DATASOURCE') {
     return <Icon size="xl" name="database" />;
+  } else if (resource.type === 'LIBRARY_ELEMENT') {
+    return <Icon size="xl" name="library-panel" />;
   }
 
   return undefined;
