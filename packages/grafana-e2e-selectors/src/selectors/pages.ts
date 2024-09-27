@@ -86,12 +86,9 @@ export const versionedPages: VersionedSelectorGroup = {
     url: {
       [MIN_GRAFANA_VERSION]: '/datasources/new',
     },
-    /** @deprecated Use dataSourcePluginsV2 */
-    dataSourcePlugins: {
-      [MIN_GRAFANA_VERSION]: (pluginName: string) => `Data source plugin item ${pluginName}`,
-    },
     dataSourcePluginsV2: {
       '9.3.1': (pluginName: string) => `Add new data source ${pluginName}`,
+      [MIN_GRAFANA_VERSION]: (pluginName: string) => `Data source plugin item ${pluginName}`,
     },
   },
   ConfirmModal: {
@@ -278,12 +275,6 @@ export const versionedPages: VersionedSelectorGroup = {
         },
         saveAsDashBoard: {
           [MIN_GRAFANA_VERSION]: 'Dashboard settings aside actions Save As button',
-        },
-        /**
-         * @deprecated use components.TimeZonePicker.containerV2 from Grafana 8.3 instead
-         */
-        timezone: {
-          [MIN_GRAFANA_VERSION]: 'Time zone picker select container',
         },
         title: {
           '11.2.0': 'General',
@@ -550,9 +541,6 @@ export const versionedPages: VersionedSelectorGroup = {
     url: {
       [MIN_GRAFANA_VERSION]: '/dashboards',
     },
-    /**
-     * @deprecated use components.Search.dashboardItem from Grafana 8.3 instead
-     */
     dashboards: {
       '10.2.0': (title: string) => `Dashboard search item ${title}`,
     },

@@ -575,18 +575,6 @@ export const versionedComponents: VersionedSelectorGroup = {
     active: { [MIN_GRAFANA_VERSION]: () => '[class*="-activeTabStyle"]' },
   },
   RefreshPicker: {
-    /**
-     * @deprecated use runButtonV2 from Grafana 8.3 instead
-     */
-    runButton: {
-      [MIN_GRAFANA_VERSION]: 'RefreshPicker run button',
-    },
-    /**
-     * @deprecated use intervalButtonV2 from Grafana 8.3 instead
-     */
-    intervalButton: {
-      [MIN_GRAFANA_VERSION]: 'RefreshPicker interval button',
-    },
     runButtonV2: {
       [MIN_GRAFANA_VERSION]: 'data-testid RefreshPicker run button',
     },
@@ -631,10 +619,10 @@ export const versionedComponents: VersionedSelectorGroup = {
       '10.4.0': (title: string) => `data-testid ${title}`,
     },
     title: {
-      '8.5.0': (refId: string) => `Query editor row title ${refId}`,
+      [MIN_GRAFANA_VERSION]: (refId: string) => `Query editor row title ${refId}`,
     },
     container: {
-      '8.5.0': (refId: string) => `Query editor row ${refId}`,
+      [MIN_GRAFANA_VERSION]: (refId: string) => `Query editor row ${refId}`,
     },
   },
   AlertTab: {
@@ -682,12 +670,6 @@ export const versionedComponents: VersionedSelectorGroup = {
     },
   },
   Alert: {
-    /**
-     * @deprecated use alertV2 from Grafana 8.3 instead
-     */
-    alert: {
-      [MIN_GRAFANA_VERSION]: (severity: string) => `Alert ${severity}`,
-    },
     alertV2: {
       [MIN_GRAFANA_VERSION]: (severity: string) => `data-testid Alert ${severity}`,
     },
@@ -923,12 +905,6 @@ export const versionedComponents: VersionedSelectorGroup = {
     },
   },
   FolderPicker: {
-    /**
-     * @deprecated use containerV2 from Grafana 8.3 instead
-     */
-    container: {
-      [MIN_GRAFANA_VERSION]: 'Folder picker select container',
-    },
     containerV2: {
       [MIN_GRAFANA_VERSION]: 'data-testid Folder picker select container',
     },
@@ -945,12 +921,6 @@ export const versionedComponents: VersionedSelectorGroup = {
     container: {
       '10.0.0': 'data-testid Data source picker select container',
       [MIN_GRAFANA_VERSION]: 'Data source picker select container',
-    },
-    /**
-     * @deprecated use inputV2 instead
-     */
-    input: {
-      [MIN_GRAFANA_VERSION]: () => 'input[id="data-source-picker"]',
     },
     inputV2: {
       '10.1.0': 'data-testid Select a data source',
@@ -969,12 +939,6 @@ export const versionedComponents: VersionedSelectorGroup = {
     },
   },
   TimeZonePicker: {
-    /**
-     * @deprecated use TimeZonePicker.containerV2 from Grafana 8.3 instead
-     */
-    container: {
-      [MIN_GRAFANA_VERSION]: 'Time zone picker select container',
-    },
     containerV2: {
       [MIN_GRAFANA_VERSION]: 'data-testid Time zone picker select container',
     },
@@ -983,12 +947,6 @@ export const versionedComponents: VersionedSelectorGroup = {
     },
   },
   WeekStartPicker: {
-    /**
-     * @deprecated use WeekStartPicker.containerV2 from Grafana 8.3 instead
-     */
-    container: {
-      [MIN_GRAFANA_VERSION]: 'Choose starting day of the week',
-    },
     containerV2: {
       [MIN_GRAFANA_VERSION]: 'data-testid Choose starting day of the week',
     },
@@ -1037,20 +995,8 @@ export const versionedComponents: VersionedSelectorGroup = {
     },
   },
   Search: {
-    /**
-     * @deprecated use sectionV2 from Grafana 8.3 instead
-     */
-    section: {
-      [MIN_GRAFANA_VERSION]: 'Search section',
-    },
     sectionV2: {
       [MIN_GRAFANA_VERSION]: 'data-testid Search section',
-    },
-    /**
-     * @deprecated use itemsV2 from Grafana 8.3 instead
-     */
-    items: {
-      [MIN_GRAFANA_VERSION]: 'Search items',
     },
     itemsV2: {
       [MIN_GRAFANA_VERSION]: 'data-testid Search items',
@@ -1077,7 +1023,7 @@ export const versionedComponents: VersionedSelectorGroup = {
       '9.3.0': (folderName: string) => `data-testid Folder content ${folderName}`,
     },
     dashboardItems: {
-      '8.5.0': 'data-testid Dashboard search item',
+      [MIN_GRAFANA_VERSION]: 'data-testid Dashboard search item',
     },
   },
   DashboardLinks: {
@@ -1098,12 +1044,6 @@ export const versionedComponents: VersionedSelectorGroup = {
     },
   },
   CallToActionCard: {
-    /**
-     * @deprecated use buttonV2 from Grafana 8.3 instead
-     */
-    button: {
-      [MIN_GRAFANA_VERSION]: (name: string) => `Call to action button ${name}`,
-    },
     buttonV2: {
       [MIN_GRAFANA_VERSION]: (name: string) => `data-testid Call to action button ${name}`,
     },
