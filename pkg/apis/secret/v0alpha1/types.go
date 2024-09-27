@@ -30,6 +30,12 @@ type SecureValueSpec struct {
 	Path string `json:"path,omitempty"`
 
 	// The APIs that are allowed to decrypt this secret
+	// testdata.grafana.app/{name1}
+	// testdata.grafana.app/{name2}
+	// runner.k6.grafana.app  -- allow any k6 test runner
+	// Perhaps: {
+	//   group:"testdata.grafana.app", name="name1"
+	// }
 	APIs []string `json:"apis"`
 }
 
