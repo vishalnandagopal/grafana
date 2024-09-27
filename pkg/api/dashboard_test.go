@@ -820,7 +820,7 @@ func getDashboardShouldReturn200WithConfig(t *testing.T, sc *scenarioContext, pr
 	features := featuremgmt.WithFeatures()
 	var err error
 	if dashboardStore == nil {
-		sql, cfg := db.InitTestReplDBWithCfg(t)
+		sql, cfg := db.InitTestDBWithCfg(t)
 		quotaService := quotatest.New(false, nil)
 		dashboardStore, err = database.ProvideDashboardStore(sql, cfg, features, tagimpl.ProvideService(sql), quotaService)
 		require.NoError(t, err)
@@ -1080,4 +1080,9 @@ func (l *mockLibraryElementService) DisconnectElementsFromDashboard(c context.Co
 // DeleteLibraryElementsInFolder deletes all elements for a specific folder.
 func (l *mockLibraryElementService) DeleteLibraryElementsInFolder(c context.Context, signedInUser identity.Requester, folderUID string) error {
 	return nil
+}
+
+// GetAll gets all library elements with support to query filters.
+func (l *mockLibraryElementService) GetAllElements(c context.Context, signedInUser identity.Requester, query model.SearchLibraryElementsQuery) (model.LibraryElementSearchResult, error) {
+	return model.LibraryElementSearchResult{}, nil
 }

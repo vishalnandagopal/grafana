@@ -887,6 +887,9 @@ export const versionedComponents: VersionedSelectorGroup = {
       '11.1.0': 'data-testid Select option',
       [MIN_GRAFANA_VERSION]: 'Select option',
     },
+    toggleAllOptions: {
+      '11.3.0': 'data-testid toggle all options',
+    },
     input: {
       [MIN_GRAFANA_VERSION]: () => 'input[id*="time-options-input"]',
     },

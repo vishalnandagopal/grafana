@@ -656,42 +656,106 @@ export const versionedPages: VersionedSelectorGroup = {
     },
   },
   ShareDashboardDrawer: {
-    ShareExternally: {
+    ShareInternally: {
       container: {
-        '11.1.1': 'data-testid share externally drawer container',
+        '11.3.0': 'data-testid share internally drawer container',
+      },
+      lockTimeRangeSwitch: {
+        '11.3.0': 'data-testid share internally lock time range switch',
+      },
+      shortenUrlSwitch: {
+        '11.3.0': 'data-testid share internally shorten url switch',
       },
       copyUrlButton: {
-        '11.1.1': 'data-testid share externally copy url button',
+        '11.3.0': 'data-testid share internally copy url button',
+      },
+    },
+    ShareExternally: {
+      container: {
+        '11.3.0': 'data-testid share externally drawer container',
+      },
+      publicAlert: {
+        '11.3.0': 'data-testid public share alert',
+      },
+      emailSharingAlert: {
+        '11.3.0': 'data-testid email share alert',
       },
       shareTypeSelect: {
-        '11.1.1': 'data-testid share externally share type select',
+        '11.3.0': 'data-testid share externally share type select',
+      },
+      Creation: {
+        PublicShare: {
+          createButton: {
+            '11.3.0': 'data-testid public share dashboard create button',
+          },
+          cancelButton: {
+            '11.3.0': 'data-testid public share dashboard cancel button',
+          },
+        },
+        EmailShare: {
+          createButton: {
+            '11.3.0': 'data-testid email share dashboard create button',
+          },
+          cancelButton: {
+            '11.3.0': 'data-testid email share dashboard cancel button',
+          },
+        },
+        willBePublicCheckbox: {
+          '11.3.0': 'data-testid share dashboard will be public checkbox',
+        },
+      },
+      Configuration: {
+        enableTimeRangeSwitch: {
+          '11.3.0': 'data-testid share externally enable time range switch',
+        },
+        enableAnnotationsSwitch: {
+          '11.3.0': 'data-testid share externally enable annotations switch',
+        },
+        copyUrlButton: {
+          '11.3.0': 'data-testid share externally copy url button',
+        },
+        revokeAccessButton: {
+          '11.3.0': 'data-testid share externally revoke access button',
+        },
+        toggleAccessButton: {
+          '11.3.0': 'data-testid share externally pause or resume access button',
+        },
       },
     },
     ShareSnapshot: {
+      url: {
+        '11.3.0': (key: string) => `/dashboard/snapshot/${key}`,
+      },
       container: {
-        '11.2.0': 'data-testid share snapshot drawer container',
+        '11.3.0': 'data-testid share snapshot drawer container',
+      },
+      publishSnapshot: {
+        '11.3.0': 'data-testid share snapshot publish button',
+      },
+      copyUrlButton: {
+        '11.3.0': 'data-testid share snapshot copy url button',
       },
     },
   },
   ExportDashboardDrawer: {
     ExportAsJson: {
       container: {
-        '11.2.0': 'data-testid export as Json drawer container',
+        '11.3.0': 'data-testid export as json drawer container',
       },
       codeEditor: {
-        '11.2.0': 'data-testid export as Json code editor',
+        '11.3.0': 'data-testid export as json code editor',
       },
       exportExternallyToggle: {
-        '11.2.0': 'data-testid export externally toggle type select',
+        '11.3.0': 'data-testid export as json externally switch',
       },
       saveToFileButton: {
-        '11.2.0': 'data-testid save to file button',
+        '11.3.0': 'data-testid export as json save to file button',
       },
       copyToClipboardButton: {
-        '11.2.0': 'data-testid copy to clipboard button',
+        '11.3.0': 'data-testid export as json copy to clipboard button',
       },
       cancelButton: {
-        '11.2.0': 'data-testid cancel button',
+        '11.3.0': 'data-testid export as json cancel button',
       },
     },
   },

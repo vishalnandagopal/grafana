@@ -387,6 +387,7 @@ export const Components = {
     },
     Select: {
         option: 'data-testid Select option',
+        toggleAllOptions: 'data-testid toggle all options',
         input: () => 'input[id*="time-options-input"]',
         singleValue: () => 'div[class*="-singleValue"]',
     },

@@ -180,6 +180,7 @@ type Cfg struct {
 	DisableFrontendSandboxForPlugins []string
 	DisableGravatar                  bool
 	DataProxyWhiteList               map[string]bool
+	ActionsAllowPostURL              string
 
 	TempDataLifetime time.Duration
 
@@ -244,6 +245,7 @@ type Cfg struct {
 	IDResponseHeaderEnabled       bool
 	IDResponseHeaderPrefix        string
 	IDResponseHeaderNamespaces    map[string]struct{}
+	ManagedServiceAccountsEnabled bool
 
 	// AWS Plugin Auth
 	AWSAllowedAuthProviders   []string
@@ -422,6 +424,8 @@ type Cfg struct {
 	// LiveHAEngine is a type of engine to use to achieve HA with Grafana Live.
 	// Zero value means in-memory single node setup.
 	LiveHAEngine string
+	// LiveHAPRefix is a prefix for HA engine keys.
+	LiveHAPrefix string
 	// LiveHAEngineAddress is a connection address for Live HA engine.
 	LiveHAEngineAddress  string
 	LiveHAEnginePassword string
@@ -530,7 +534,8 @@ type Cfg struct {
 }
 
 type UnifiedStorageConfig struct {
-	DualWriterMode rest.DualWriterMode
+	DualWriterMode                       rest.DualWriterMode
+	DualWriterPeriodicDataSyncJobEnabled bool
 }
 
 type InstallPlugin struct {
@@ -1538,6 +1543,7 @@ func readSecuritySettings(iniFile *ini.File, cfg *Cfg) error {
 
 	cfg.ContentTypeProtectionHeader = security.Key("x_content_type_options").MustBool(true)
 	cfg.XSSProtectionHeader = security.Key("x_xss_protection").MustBool(true)
+	cfg.ActionsAllowPostURL = security.Key("actions_allow_post_url").MustString("")
 	cfg.StrictTransportSecurity = security.Key("strict_transport_security").MustBool(false)
 	cfg.StrictTransportSecurityMaxAge = security.Key("strict_transport_security_max_age_seconds").MustInt(86400)
 	cfg.StrictTransportSecurityPreload = security.Key("strict_transport_security_preload").MustBool(false)
@@ -1663,6 +1669,10 @@ func readAuthSettings(iniFile *ini.File, cfg *Cfg) (err error) {
 	for _, provider := range util.SplitString(providers) {
 		cfg.SSOSettingsConfigurableProviders[provider] = true
 	}
+
+	// Managed Service Accounts
+	cfg.ManagedServiceAccountsEnabled = auth.Key("managed_service_accounts_enabled").MustBool(false)
+
 	return nil
 }
 
@@ -2021,6 +2031,7 @@ func (cfg *Cfg) readLiveSettings(iniFile *ini.File) error {
 	default:
 		return fmt.Errorf("unsupported live HA engine type: %s", cfg.LiveHAEngine)
 	}
+	cfg.LiveHAPrefix = section.Key("ha_prefix").MustString("")
 	cfg.LiveHAEngineAddress = section.Key("ha_engine_address").MustString("127.0.0.1:6379")
 	cfg.LiveHAEnginePassword = section.Key("ha_engine_password").MustString("")
 
@@ -2048,4 +2059,11 @@ func (cfg *Cfg) readLiveSettings(iniFile *ini.File) error {
 func (cfg *Cfg) readPublicDashboardsSettings() {
 	publicDashboards := cfg.Raw.Section("public_dashboards")
 	cfg.PublicDashboardsEnabled = publicDashboards.Key("enabled").MustBool(true)
+}
+
+func (cfg *Cfg) DefaultOrgID() int64 {
+	if cfg.AutoAssignOrg && cfg.AutoAssignOrgId > 0 {
+		return int64(cfg.AutoAssignOrgId)
+	}
+	return int64(1)
 }
