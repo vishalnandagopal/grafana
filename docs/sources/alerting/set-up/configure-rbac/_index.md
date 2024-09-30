@@ -68,16 +68,16 @@ Mute time interval permissions. To enable these permissions, enable the  `alerti
 
 | Action                                      | Applicable scope | Description                                       |
 | ------------------------------------------- | ---------------- | ------------------------------------------------- |
-| `alert.notifications.time-intervals:read`   | n/a              | Read mute time intervals                          |
-| `alert.notifications.time-intervals:write`  | n/a              | Create new or update existing mute time intervals |
-| `alert.notifications.time-intervals:delete` | n/a              | Delete existing time intervals                    |
+| `alert.notifications.time-intervals:read`   | n/a              | Read mute time intervals.                          |
+| `alert.notifications.time-intervals:write`  | n/a              | Create new or update existing mute time intervals. |
+| `alert.notifications.time-intervals:delete` | n/a              | Delete existing time intervals.                    |
 
-Permissions to access notification templates (require feature flag `alertingApiServer` to be enabled)
+Notification template permissions. To enable these permissions, enable the `alertingApiServer` feature toggle.
 
 | Action                                 | Applicable scope | Description                             |
 | -------------------------------------- | ---------------- | --------------------------------------- |
-| `alert.notifications.templates:read`   | n/a              | Read templates                          |
-| `alert.notifications.templates:write`  | n/a              | Create new or update existing templates |
-| `alert.notifications.templates:delete` | n/a              | Delete existing templates               |
+| `alert.notifications.templates:read`   | n/a              | Read templates.                          |
+| `alert.notifications.templates:write`  | n/a              | Create new or update existing templates. |
+| `alert.notifications.templates:delete` | n/a              | Delete existing templates.               |
 
 To help plan your RBAC rollout strategy, refer to [Plan your RBAC rollout strategy](https://grafana.com/docs/grafana/next/administration/roles-and-permissions/access-control/plan-rbac-rollout-strategy/).
