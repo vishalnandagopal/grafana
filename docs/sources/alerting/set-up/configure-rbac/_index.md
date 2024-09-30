@@ -52,19 +52,19 @@ Grafana Alerting has the following permissions.
 | `alert.provisioning:write`            | n/a                                    | Update all Grafana alert rules, notification policies, etc via provisioning API. Permissions to folders and data source are not required.                                                                           |
 | `alert.provisioning.provenance:write` | n/a                                    | Set provisioning status for alerting resources. Cannot be used alone. Requires user to have permissions to access resources                                                                                         |
 
-Permissions to access contact points (require feature flag `alertingApiServer` to be enabled)
+Contact point permissions. To enable these permissions, enable the `alertingApiServer` feature toggle.
 
 | Action                                       | Applicable scope                   | Description                                                                                                |
 | -------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `alert.notifications.receivers:read`         | `receivers:*`<br>`receivers:uid:*` | Read contact points.                                                                                       |
-| `alert.notifications.receivers.secrets:read` | `receivers:*`<br>`receivers:uid:*` | Export contact points with decrypted secrets                                                               |
-| `alert.notifications.receivers:create`       | n/a                                | Create a new contact points. The creator is automatically granted full access to the created contact point |
-| `alert.notifications.receivers:write`        | `receivers:*`<br>`receivers:uid:*` | Update existing contact points                                                                             |
-| `alert.notifications.receivers:delete`       | `receivers:*`<br>`receivers:uid:*` | Update and delete existing contact points                                                                  |
-| `receivers.permissions:read`                 | `receivers:*`<br>`receivers:uid:*` | Read permissions for contact points                                                                        |
-| `receivers.permissions:write`                | `receivers:*`<br>`receivers:uid:*` | Manage permissions for contact points                                                                      |
+| `alert.notifications.receivers.secrets:read` | `receivers:*`<br>`receivers:uid:*` | Export contact points with decrypted secrets.                                                               |
+| `alert.notifications.receivers:create`       | n/a                                | Create a new contact points. The creator is automatically granted full access to the created contact point.|
+| `alert.notifications.receivers:write`        | `receivers:*`<br>`receivers:uid:*` | Update existing contact points.                                                                             |
+| `alert.notifications.receivers:delete`       | `receivers:*`<br>`receivers:uid:*` | Update and delete existing contact points.                                                                 |
+| `receivers.permissions:read`                 | `receivers:*`<br>`receivers:uid:*` | Read permissions for contact points.                                                                        |
+| `receivers.permissions:write`                | `receivers:*`<br>`receivers:uid:*` | Manage permissions for contact points.                                                                      |
 
-Permissions to access mute time intervals (require feature flag `alertingApiServer` to be enabled)
+Mute time interval permissions. To enable these permissions, enable the  `alertingApiServer` feature toggle.
 
 | Action                                      | Applicable scope | Description                                       |
 | ------------------------------------------- | ---------------- | ------------------------------------------------- |
