@@ -20,6 +20,10 @@ type ExternalSession struct {
 	CreatedAt     time.Time `xorm:"created 'created_at'"`
 }
 
+func (e *ExternalSession) TableName() string {
+	return "user_external_session"
+}
+
 func (e *ExternalSession) Clone() *ExternalSession {
 	return &ExternalSession{
 		ID:            e.ID,
@@ -54,4 +58,6 @@ type ExternalSessionStore interface {
 	DeleteExternalSession(ctx context.Context, ID int64) error
 	// DeleteExternalSessionBySessionID deletes an external session
 	DeleteExternalSessionsByUserID(ctx context.Context, userID int64) error
+	// BatchDeleteExternalSessionsByUserIDs deletes external sessions by user IDs
+	BatchDeleteExternalSessionsByUserIDs(ctx context.Context, userIDs []int64) error
 }
